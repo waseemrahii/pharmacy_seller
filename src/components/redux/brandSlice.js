@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import ApiUrl from '../../ApiUrl';
 
 // API Endpoints
-const API_URL = 'http://localhost:3000/api/brands';
+const API_URL = `${ApiUrl}/api/brands`;
 
 // Fetch brands
 export const fetchBrands = createAsyncThunk(

@@ -1,4 +1,44 @@
 
+
+// import React, { useState } from 'react';
+
+// const CategoryForm = ({ selectedLang, newCategory, onInputChange, onSubmit }) => {
+//   return (
+//     <form onSubmit={onSubmit}>
+//       <div className="row">
+//         <div className="col-lg-6">
+//           {['en', 'sa', 'bd', 'in'].map((lang) => (
+//             <div className={`form-group ${selectedLang === lang ? '' : 'd-none'} form-system-language-form`} key={lang} id={`${lang}-form`}>
+//               <label className="title-color">
+//                 Category Name
+//               </label>
+//               <input
+//                 type="text"
+//                 name="name"
+//                 className="form-control"
+//                 placeholder="New Category"
+//                 required={lang === 'en'}
+//                 value={newCategory.name}
+//                 onChange={onInputChange}
+//               />
+//             </div>
+//           ))}
+//         </div>
+//         <div className="d-flex flex-wrap gap-2 justify-content-end w-full p-3">
+//           <button type="reset" id="reset" className="btn btn-success">Reset</button>
+//           <button type="submit" className="btn bg-green-400 text-white">Submit</button>
+//         </div>
+//       </div>
+//     </form>
+//   );
+// };
+
+// export default React.memo(CategoryForm);
+
+
+
+
+
 import React, { useCallback, useState } from 'react';
 
 const CategoryForm = ({ selectedLang, newCategory, onInputChange, onFileChange, onSubmit }) => {
@@ -8,19 +48,21 @@ const CategoryForm = ({ selectedLang, newCategory, onInputChange, onFileChange, 
     const file = e.target.files[0];
     if (file) {
       setPreview(URL.createObjectURL(file)); // Create a preview URL
-      onFileChange(file);
+      onFileChange(file); // Pass the file to the parent component
     } else {
       setPreview(null); // Reset the preview if no file is selected
     }
   }, [onFileChange]);
 
   return (
-    <form onSubmit={onSubmit}> {/* Make sure onSubmit is on the form */}
+    <form onSubmit={onSubmit}>
       <div className="row">
         <div className="col-lg-6">
           {['en', 'sa', 'bd', 'in'].map((lang) => (
             <div className={`form-group ${selectedLang === lang ? '' : 'd-none'} form-system-language-form`} key={lang} id={`${lang}-form`}>
-              <label className="title-color">Category Name<span className="text-danger">*</span> ({lang.toUpperCase()})</label>
+              <label className="title-color">
+                Category Name<span className="text-danger">*</span> ({lang.toUpperCase()})
+              </label>
               <input
                 type="text"
                 name="name"
@@ -32,21 +74,7 @@ const CategoryForm = ({ selectedLang, newCategory, onInputChange, onFileChange, 
               />
             </div>
           ))}
-          <div className="form-group">
-            <label className="title-color" htmlFor="priority">Priority</label>
-            <select
-              className="form-control"
-              name="priority"
-              required
-              value={newCategory.priority}
-              onChange={onInputChange}
-            >
-              <option disabled>Set Priority</option>
-              {[...Array(11).keys()].map(num => (
-                <option value={num} key={num}>{num}</option>
-              ))}
-            </select>
-          </div>
+       
           <div className="form-group">
             <label className="title-color">Category Logo</label>
             <span className="text-info"><span className="text-danger">*</span> Ratio 1:1 (500 x 500 px)</span>
@@ -71,7 +99,7 @@ const CategoryForm = ({ selectedLang, newCategory, onInputChange, onFileChange, 
                 className="upload-img-view"
                 id="viewer"
                 alt=""
-                src={preview || 'https://6valley.6amtech.com/public/assets/back-end/img/image-place-holder.png'}
+                src={preview || '/image-place-holder.png'}
               />
             </div>
           </div>

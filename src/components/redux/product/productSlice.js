@@ -1,11 +1,9 @@
-
-
-
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import ApiUrl from '../../../ApiUrl';
 
 // API Endpoints
-const API_URL = 'http://localhost:3000/api/products';
+const API_URL = `${ApiUrl}/api/products`;
 
 // Fetch products with dynamic query parameters
 export const fetchProducts = createAsyncThunk(
@@ -13,7 +11,7 @@ export const fetchProducts = createAsyncThunk(
   async (searchParams = {}, { rejectWithValue }) => {
     try {
       const response = await axios.get(API_URL, { params: searchParams });
-      return response.data.docs.products || []; // Handle cases where response.data.docs might not be an array
+      return response.data.docs; // Return the whole `docs` object
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }
@@ -102,10 +100,18 @@ export const updateProductStatus = createAsyncThunk(
 const initialState = {
   products: [],
   currentProduct: null,
+  totalDocs: 0,
+  limit: 10,
+  totalPages: 0,
+  currentPage: 1,
+  pagingCounter: 0,
+  hasPrevPage: false,
+  hasNextPage: false,
+  prevPage: null,
+  nextPage: null,
   loading: false,
   error: null,
 };
-
 // Create slice
 const productSlice = createSlice({
   name: 'product',
@@ -119,7 +125,17 @@ const productSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = action.payload;
+        const { products, totalDocs, limit, totalPages, page, pagingCounter, hasPrevPage, hasNextPage, prevPage, nextPage } = action.payload;
+        state.products = products || [];
+        state.totalDocs = totalDocs || 0;
+        state.limit = limit || 10;
+        state.totalPages = totalPages || 0;
+        state.currentPage = page || 1;
+        state.pagingCounter = pagingCounter || 0;
+        state.hasPrevPage = hasPrevPage || false;
+        state.hasNextPage = hasNextPage || false;
+        state.prevPage = prevPage || null;
+        state.nextPage = nextPage || null;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;

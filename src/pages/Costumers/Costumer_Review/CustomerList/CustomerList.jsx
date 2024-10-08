@@ -272,8 +272,9 @@ const CustomerList = () => {
                   />
                   <button
                     type="submit"
-                    className="btn px-4 py-2 bg-[#A1CB46] text-white hover:bg-[#7e9f37]"
-                  >
+                    className="btn px-4 py-2 bg-[#1EBEB6] text-white hover:bg-[#1EBEB6]"
+                      style={{color:"white"}}
+                   >
                     Search
                   </button>
                 </div>
@@ -283,8 +284,8 @@ const CustomerList = () => {
               <div className="d-flex justify-content-sm-end">
                 <button
                   type="button"
-                  className="btn px-4 py-2 bg-[#A1CB46] text-white hover:bg-[#7e9f37] flex gap-1"
-                  style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                  className="btn px-4 py-2 bg-[#1EBEB6] text-white hover:bg-[#1EBEB6] flex gap-1"
+                  style={{ display: "flex", justifyContent: "center", alignItems: "center", color:"white" }}
                   data-toggle="dropdown"
                 >
                   <FaDownload /> Export
@@ -309,10 +310,10 @@ const CustomerList = () => {
             <thead className="thead-light thead-50 text-capitalize">
               <tr>
                 <th>SL</th>
-                <th>Customer name</th>
-                <th>Contact info</th>
-                <th>Total Order </th>
-                <th className="text-center">Block / Unblock</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email </th>
+                <th className="text-center">Phone</th>
                 <th className="text-center">Action</th>
               </tr>
             </thead>
@@ -321,18 +322,21 @@ const CustomerList = () => {
                 <tr key={customer._id}>
                   <td>{index + 1}</td>
                   <td>
-                    <a
-                      href={`/admin/customer/view/${customer._id}`}
-                      className="title-color hover-c1 d-flex align-items-center gap-10"
-                    >
-                      <img
+                  
+                      {/* <img
                         src={customer.image || "https://6valley.6amtech.com/public/assets/back-end/img/placeholder/user.png"}
                         className="avatar rounded-circle"
                         alt=""
                         width="40"
-                      />{" "}
-                      {customer.firstName} {customer.lastName}
-                    </a>
+                      /> */}
+                      {customer.firstName} 
+                 
+                  </td>
+                  <td>
+                  
+                    
+                      {customer.lastName} 
+                 
                   </td>
                   <td>
                     <div className="mb-1">
@@ -342,16 +346,13 @@ const CustomerList = () => {
                         </a>
                       </strong>
                     </div>
-                    <a className="title-color hover-c1" href={`tel:${customer.phoneNumber}`}>
-                      {customer.phoneNumber}
-                    </a>
+                   
                   </td>
-                  <td>
-                    <label className="btn text-info bg-soft-info font-weight-bold px-3 py-1 mb-0 fz-12">
-                      {customer.totalOrders || 0}
-                    </label>
+                  <td className="text-center">
+                    {customer.phoneNumber}
                   </td>
-                  <td>
+                
+                  {/* <td>
                     <form
                       action="https://6valley.6amtech.com/admin/customer/status-update"
                       method="post"
@@ -385,16 +386,16 @@ const CustomerList = () => {
                         <span className="switcher_control"></span>
                       </label>
                     </form>
-                  </td>
+                  </td> */}
                   <td>
                     <div className="d-flex justify-content-center gap-2">
-                      <a
+                      {/* <a
                         title="View"
                         className="btn btn-outline-info btn-sm square-btn"
                         href={`/admin/customer/view/${customer._id}`}
                       >
                         <FaEye />
-                      </a>
+                      </a> */}
                       <a
                         title="Delete"
                         className="btn btn-outline-danger btn-sm delete square-btn delete-data"

@@ -84,7 +84,9 @@
 
 
 
-////////////// using react query 
+
+
+/////////////////
 
 import React, { useEffect, useState } from "react";
 import {
@@ -102,7 +104,7 @@ import { RiMenuUnfold3Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth } from './utils/auth';
 import AllRoutes from "./Routes.jsx";
-
+import './App.css'
 // Create a client
 const queryClient = new QueryClient();
 
@@ -166,8 +168,6 @@ function App() {
 }
 
 export default App;
-
-
 
 
 

@@ -1,14 +1,19 @@
 import React from 'react';
 import InHouseProductList from './ProductManagmentPage.jsx';
+import { useSelector } from 'react-redux';
 
 const InHouseProductPage = () => {
+  const { user } = useSelector(state => state.auth);
+  const userId = user?._id || ''; // Fallback to an empty string if userId is undefined
+  console.log("user id ============", userId)
   return (
     <InHouseProductList
-      initialTitle="In-House Products"
+      initialTitle="Vendor All Products"
       initialFilters={{
         brand: '',
         category: '',
         searchValue: '',
+        userId: userId,
         userType: '', // No filter for userType
         status: '', // No filter for status
         vendorNew4Days: false
@@ -26,7 +31,7 @@ const VendorPendingProductPage = () => {
         category: '',
         searchValue: '',
         userType: 'vendor', // Filter for vendor
-        status: 'pending', // Filter for pending status
+        status: '', // Filter for pending status
         vendorNew4Days: false
       }}
     />

@@ -2,12 +2,13 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import ApiUrl from '../../ApiUrl';
 
 // Fetch categories
 export const fetchCategories = createAsyncThunk(
   'category/fetchCategories',
   async () => {
-    const response = await axios.get('http://localhost:3000/api/categories/');
+    const response = await axios.get(`${ApiUrl}/api/categories/`);
     return response.data.docs || []; // Assuming response.data.docs contains the array of categories
   }
 );
@@ -16,8 +17,8 @@ export const fetchCategories = createAsyncThunk(
 export const fetchBrands = createAsyncThunk(
   'category/fetchBrands',
   async () => {
-    const response = await axios.get('http://localhost:3000/api/brands/');
-    return response.data.docs || []; // Handle cases where response.data.docs might not be an array
+    const response = await axios.get(`${ApiUrl}/api/brands/`);
+    return response.data.doc || []; // Handle cases where response.data.docs might not be an array
   }
 );
 
@@ -25,21 +26,21 @@ export const fetchBrands = createAsyncThunk(
 export const fetchColors = createAsyncThunk(
   'category/fetchColors',
   async () => {
-    const response = await axios.get('http://localhost:3000/api/colors/');
+    const response = await axios.get(`${ApiUrl}/api/colors/`);
     return response.data || []; // Assuming response.data.docs contains the array of colors
   }
 );
 
 export const fetchAttributes = createAsyncThunk('attributes/fetchAttributes', async () => {
-  const response = await axios.get('http://localhost:3000/api/attributes/');
+  const response = await axios.get(`${ApiUrl}/api/attributes/`);
   return response.data;
 });
 // Fetch sub-categories by main category slug
 export const fetchSubCategories = createAsyncThunk(
   'category/fetchSubCategories',
   async (mainCategorySlug) => {
-    const response = await axios.get(`http://localhost:3000/api/sub-categories/main-category/${mainCategorySlug}`);
-    return response.data.docs || [];  // Handle cases where response.data.docs.subCategories might not be an array
+    const response = await axios.get(`${ApiUrl}/api/sub-categories/main-category/${mainCategorySlug}`);
+    return response.data.doc || [];  // Handle cases where response.data.docs.subCategories might not be an array
   }
 );
 
@@ -47,8 +48,8 @@ export const fetchSubCategories = createAsyncThunk(
 export const fetchSubSubCategories = createAsyncThunk(
   'category/fetchSubSubCategories',
   async (subCategorySlug) => {
-    const response = await axios.get(`http://localhost:3000/api/sub-sub-categories/subcategory/${subCategorySlug}`);
-    return response.data.docs || [];  // Handle cases where response.data.docs.subSubCategories might not be an array
+    const response = await axios.get(`${ApiUrl}/api/sub-sub-categories/subcategory/${subCategorySlug}`);
+    return response.data.doc || [];  // Handle cases where response.data.docs.subSubCategories might not be an array
   }
 );
 

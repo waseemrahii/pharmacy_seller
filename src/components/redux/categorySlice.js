@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import ApiUrl from '../../ApiUrl';
 
 // API Endpoints
-const API_URL = 'http://localhost:3000/api/categories';
+const API_URL = `${ApiUrl}/api/categories`;
 
 // Fetch categories
 export const fetchCategories = createAsyncThunk(
@@ -36,7 +37,7 @@ export const createCategory = createAsyncThunk(
   async (categoryData, { rejectWithValue }) => {
     try {
       const response = await axios.post(API_URL, categoryData);
-      return response.data;
+      return response.data.docs;
     } catch (error) {
       return rejectWithValue(error.response?.data || error.message);
     }

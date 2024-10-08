@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import {
   AiOutlineSearch,
   AiOutlinePlus,
-  AiOutlineEye,
-  AiOutlineDelete,
-  AiOutlineCiCircle,
+  
 } from "react-icons/ai";
 import { FaTrash } from "react-icons/fa";
 
@@ -47,8 +45,7 @@ const VendorTable = ({ vendors, onDeleteVendor, onUpdateStatus }) => (
           <th>Vendor Name</th>
           <th>Contact Info</th>
           <th>Status</th>
-          <th className="text-center">Total Products</th>
-          <th className="text-center">Total Orders</th>
+        
           <th className="text-center">Action</th>
         </tr>
       </thead>
@@ -105,12 +102,7 @@ const VendorTable = ({ vendors, onDeleteVendor, onUpdateStatus }) => (
                 {vendor.status}
               </label>
             </td>
-            <td className="text-center">
-              {vendor.totalProducts}
-            </td>
-            <td className="text-center">
-              {vendor.totalOrders}
-            </td>
+         
             <td className="text-center">
               <div className="btn--group flex gap-2">
                 {/* <Link
@@ -167,7 +159,7 @@ const VendorList = () => {
               const productsResponse = await axios.get(
                 `http://localhost:3000/api/products/?userId=${vendor._id}`
               );
-              const totalProducts = productsResponse.data.docs.products.length;
+              const totalProducts = productsResponse.data.docs.length;
               return { ...vendor, totalProducts };
             } catch (error) {
               console.error("Error fetching products:", error);

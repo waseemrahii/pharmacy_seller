@@ -8,9 +8,9 @@ export const fetchOrder = createAsyncThunk(
   'vendorOrder/fetchOrdersForVendor',
   async (searchParams, { rejectWithValue }) => {
     try {
-      const url = 'http://localhost:3000/api/orders/';
+      const url = `${ApiUrl}/api/orders/`;
       const response = await axios.get(url, { params: searchParams });
-      return response.data.docs;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -22,9 +22,9 @@ export const fetchOrdersWithFilters = createAsyncThunk(
   'vendorOrder/fetchOrdersForVendor',
   async (searchParams, { rejectWithValue }) => {
     try {
-      const url = 'http://localhost:3000/api/orders/';
+      const url = `${ApiUrl}/api/orders/`;
       const response = await axios.get(url, { params: searchParams });
-      return response.data.docs;
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -35,8 +35,8 @@ export const fetchOrderById = createAsyncThunk(
   'vendorOrder/fetchOrderById',
   async (orderId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/orders/${orderId}`);
-      return response.data.docs;
+      const response = await axios.get(`${ApiUrl}/api/orders/${orderId}`);
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -47,7 +47,7 @@ export const fetchOrderById = createAsyncThunk(
 export const updateOrderStatus = createAsyncThunk(
   'vendorOrder/updateOrderStatus',
   async ({ orderId, status }) => {
-    const response = await axios.put(`http://localhost:3000/api/orders/${orderId}/status`, { orderStatus: status });
+    const response = await axios.put(`${ApiUrl}/api/orders/${orderId}/status`, { orderStatus: status });
     return { orderId, status };
   }
 );
@@ -56,7 +56,7 @@ export const updateOrderStatus = createAsyncThunk(
 export const deleteOrder = createAsyncThunk(
   'vendorOrder/deleteOrder',
   async (orderId) => {
-    await axios.delete(`http://localhost:3000/api/orders/${orderId}`);
+    await axios.delete(`${ApiUrl}/api/orders/${orderId}`);
     return orderId;
   }
 );
@@ -115,3 +115,6 @@ const vendorOrderSlice = createSlice({
 });
 
 export default vendorOrderSlice.reducer;
+
+
+
